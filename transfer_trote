@@ -1,0 +1,7 @@
+<extension name="Transfer_1001(trote)" continue="false" uuid="318a2842-2e3a-47cb-a6cb-234f1a108404">
+	<condition field="destination_number" expression="^1001$" >
+		<action application="answer" data="" />
+		<action application="playback" data="/usr/share/unity/sounds/music/ciosp-se.br.smartspace.us/trote_crime_1001.wav" />
+		<action application="hangup" data="" />
+	</condition>
+</extension>
