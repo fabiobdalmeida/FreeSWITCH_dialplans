@@ -1,0 +1,7 @@
+<extension name="Transfer_1000(ligacao_muda)" continue="false" uuid="b25cdf63-6140-4627-8c3b-8aa15aa392e0">
+	<condition field="destination_number" expression="^1000$" >
+		<action application="answer" data="" />
+		<action application="playback" data="/usr/share/unity/sounds/music/ciosp-se.br.smartspace.us/falta_de_comunicacao_1000.wav" />
+		<action application="hangup" data="" />
+	</condition>
+</extension>
