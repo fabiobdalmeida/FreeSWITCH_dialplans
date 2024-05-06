@@ -1,0 +1,23 @@
+<extension name="Entrada_AGU_PFCJUSE" continue="false" uuid="0642eabf-3332-4f86-8de9-21cf15cfc6de">
+	<condition field="destination_number" expression="^()$" >
+		<action application="set" data="call_direction=inbound" inline="true"/>
+		<action application="set" data="domain_uuid=1103b361-5bd5-487e-b57b-8e6058ed10c9" inline="true"/>
+		<action application="set" data="domain_name=agu-pfcjuse.cx.telflex.com.br" />
+		<action application="set" data="domain=agu-pfcjuse.cx.telflex.com.br" />
+		<action application="set" data="curl_timeout=2" inline="true"/>
+		<action application="curl" data="http://127.0.0.1:8080/chamadaexterna?ramal=${destination_number:-4}&dominio=${domain_uuid}" inline="true"/>
+		<action application="lua" data="unity/check_inbound.lua" inline="true"/>
+	</condition>
+	<condition field="${curl_response_data}" expression="^$" break="never">
+		<action application="set" data="call_direction=inbound" inline="true"/>
+		<action application="set" data="domain_uuid=1103b361-5bd5-487e-b57b-8e6058ed10c9" inline="true"/>
+		<action application="set" data="curl_timeout=2" inline="true"/>
+		<action application="set" data="http://backup-integration:8080/chamadaexterna?ramal=${destination_number:-4}&dominio=${domain_uuid}" inline="true"/>
+		<action application="lua" data="unity/check_inbound.lua" inline="true"/>
+	</condition>
+	<condition field="destination_number" expression="^()$" >
+		<action application="export" data="alert_info=http://notused.com;info=alert-external;x-line-id=0" />
+		<action application="export" data="early_use_180=true" />
+		<action application="transfer" data="${destination_number:-4} XML ${domain_name}" />
+	</condition>
+</extension>
