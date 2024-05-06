@@ -1,0 +1,17 @@
+<extension name="Adiciona_CSP" continue="true" uuid="f3bfb0c9-e84e-49c8-8a6f-1aed104b5566">
+	<condition field="destination_number" expression="^(([1-9][1-9]9\d{8})|([1-9][1-9][2-5]\d{7}))$" break="on-true">
+		<action application="set" data="extension=021${destination_number}" inline="true"/>
+		<action application="set" data="destination_number=021${destination_number}" inline="true"/>
+		<action application="set" data="dialed_extension=021${destination_number}" inline="true"/>
+	</condition>
+	<condition field="destination_number" expression="^((0[1-9][1-9]9\d{8})|(0[1-9][1-9][2-5]\d{7}))$" break="on-true">
+		<action application="set" data="extension=021${destination_number:1}" inline="true"/>
+		<action application="set" data="dialed_extension=021${destination_number:1}" inline="true"/>
+		<action application="set" data="destination_number=021${destination_number:1}" inline="true"/>
+	</condition>
+	<condition field="destination_number" expression="^((55[1-9][1-9]9\d{8})|(55[1-9][1-9][2-5]\d{7}))$" break="on-true">
+		<action application="set" data="extension=021${destination_number:2}" inline="true"/>
+		<action application="set" data="dialed_extension=021${destination_number:2}" inline="true"/>
+		<action application="set" data="destination_number=021${destination_number:2}" inline="true"/>
+	</condition>
+</extension>
